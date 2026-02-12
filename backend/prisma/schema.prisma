@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime  @default(now())
+  machines     Machine[]
+}
+
+model Machine {
+  id                   String   @id @default(cuid())
+  userId               String
+  machineName          String
+  machineType          String
+  ratedPowerKw         Float
+  temperatureC         Float
+  vibrationMmS         Float
+  rpm                  Int
+  voltage              Float
+  current              Float
+  ageYears             Int
+  dailyOperatingHours  Float
+  maintenanceCondition String
+
+  efficiencyLossPct    Float
+  energyWasteKwh       Float
+  carbonEmissionKgCo2e Float
+  failureRiskPct       Float
+  greenHealthScore     String
+  insightsJson         String
+  alertsJson           String
+  contributionsJson    String
+
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
