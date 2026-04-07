@@ -1,0 +1,323 @@
+/* ══════════════════════════════════════════════════════════
+   GreenPulse — Custom Styles (Tailwind companion)
+   Only for components that need custom CSS beyond Tailwind
+   ══════════════════════════════════════════════════════════ */
+
+/* ─── NAV ITEMS ───────────────────────────────────────────── */
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px; border-radius: 10px;
+  color: #8b949e; font-size: 0.88rem; font-weight: 500;
+  transition: all 150ms ease; position: relative;
+  text-decoration: none;
+}
+.nav-item:hover { background: #141a22; color: #e6edf3; }
+.nav-item.active { background: rgba(63,185,80,0.12); color: #3fb950; }
+.nav-item.active::before {
+  content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 20px; background: #3fb950; border-radius: 0 3px 3px 0;
+}
+.nav-item svg { flex-shrink: 0; opacity: 0.6; }
+.nav-item.active svg { opacity: 1; }
+
+/* ─── CUSTOM BUTTONS ──────────────────────────────────────── */
+.btn-green, .btn-outline, .btn-red, .btn-amber {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 16px; border-radius: 10px;
+  font-size: 0.82rem; font-weight: 600; border: none;
+  transition: all 150ms ease; white-space: nowrap; cursor: pointer;
+}
+.btn-green {
+  background: linear-gradient(135deg,#3fb950,#2ea043); color: #fff;
+  box-shadow: 0 2px 10px rgba(63,185,80,0.25);
+}
+.btn-green:hover { box-shadow: 0 4px 18px rgba(63,185,80,0.4); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent; color: #8b949e;
+  border: 1px solid #21262d;
+}
+.btn-outline:hover { background: #141a22; color: #e6edf3; border-color: #484f58; }
+.btn-red { background: linear-gradient(135deg,#f85149,#da3633); color: #fff; }
+.btn-red:hover { transform: translateY(-1px); }
+.btn-amber { background: linear-gradient(135deg,#d29922,#bb8009); color: #fff; }
+.btn-amber:hover { transform: translateY(-1px); }
+
+/* ─── SUMMARY CARDS ───────────────────────────────────────── */
+.summary-card {
+  background: #141a22; border: 1px solid #21262d;
+  border-radius: 14px; padding: 20px;
+  display: flex; align-items: center; gap: 14px;
+  transition: all 250ms ease; position: relative; overflow: hidden;
+}
+.summary-card:hover {
+  border-color: #484f58; transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.card-icon {
+  width: 46px; height: 46px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; border-width: 1px; border-style: solid;
+}
+.card-glow {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  opacity: 0; transition: opacity 250ms ease;
+}
+.summary-card:hover .card-glow { opacity: 1; }
+
+@media (max-width: 1400px) { #summary-cards { grid-template-columns: repeat(3,1fr) !important; } }
+@media (max-width: 900px) { #summary-cards { grid-template-columns: repeat(2,1fr) !important; } }
+
+/* ─── FILTER BUTTONS ──────────────────────────────────────── */
+.filter-btn {
+  padding: 5px 13px; border: none; background: transparent;
+  color: #8b949e; font-size: 0.75rem; font-weight: 600;
+  border-radius: 6px; transition: all 150ms ease; cursor: pointer;
+}
+.filter-btn:hover { color: #e6edf3; }
+.filter-btn.active { background: #141a22; color: #e6edf3; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+
+/* ─── MACHINE CARDS ───────────────────────────────────────── */
+.machine-card {
+  background: #141a22; border: 1px solid #21262d;
+  border-radius: 14px; padding: 16px 20px;
+  display: grid; grid-template-columns: 1.2fr auto auto auto auto;
+  align-items: center; gap: 16px;
+  transition: all 200ms ease; cursor: pointer;
+}
+.machine-card:hover {
+  background: #1a2230; border-color: #484f58;
+  transform: translateX(3px);
+}
+
+/* ─── STATUS BADGES ───────────────────────────────────────── */
+.status-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 11px; border-radius: 20px;
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.status-badge.Efficient { background: rgba(63,185,80,0.1); color: #3fb950; border: 1px solid rgba(63,185,80,0.25); }
+.status-badge.Warning { background: rgba(210,153,34,0.1); color: #d29922; border: 1px solid rgba(210,153,34,0.25); }
+.status-badge.Critical { background: rgba(248,81,73,0.1); color: #f85149; border: 1px solid rgba(248,81,73,0.25); animation: pulseCritical 2s infinite; }
+@keyframes pulseCritical { 0%,100% { box-shadow: none; } 50% { box-shadow: 0 0 0 4px rgba(248,81,73,0.15); } }
+
+.status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.status-dot.Efficient { background: #3fb950; }
+.status-dot.Warning { background: #d29922; }
+.status-dot.Critical { background: #f85149; }
+
+/* ─── ACTION BUTTONS (machine row) ────────────────────────── */
+.action-btn {
+  width: 32px; height: 32px;
+  border: 1px solid #21262d; background: #0f1419;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #8b949e; transition: all 150ms ease; cursor: pointer;
+}
+.action-btn:hover { border-color: #484f58; color: #e6edf3; background: #1c2432; }
+.action-btn.edit:hover { border-color: #38bdf8; color: #38bdf8; }
+.action-btn.delete:hover { border-color: #f85149; color: #f85149; }
+.action-btn.view:hover { border-color: #3fb950; color: #3fb950; }
+
+/* ─── EMPTY STATE ─────────────────────────────────────────── */
+.empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 50px 20px; text-align: center;
+}
+
+/* ─── FORM ────────────────────────────────────────────────── */
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 0.75rem; font-weight: 600; color: #8b949e; letter-spacing: 0.02em; }
+.form-group input,
+.form-group select {
+  padding: 10px 14px; background: #0a0e14;
+  border: 1px solid #21262d; border-radius: 8px;
+  color: #e6edf3; font-size: 0.85rem;
+  transition: all 150ms ease; outline: none;
+}
+.form-group input:focus,
+.form-group select:focus { border-color: #3fb950; box-shadow: 0 0 0 3px rgba(63,185,80,0.15); }
+.form-group input::placeholder { color: #484f58; }
+.form-group select {
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23484f58' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  padding-right: 36px;
+}
+
+/* ─── MODALS ──────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+  display: none; align-items: center; justify-content: center; z-index: 1000;
+}
+.modal-overlay.active { display: flex; }
+
+.modal-panel {
+  background: #0f1419; border: 1px solid #21262d;
+  border-radius: 18px; width: 92%;
+  max-height: 85vh; overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+  animation: modalIn 350ms cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(24px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* ─── DETAIL MODAL CONTENT ────────────────────────────────── */
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.detail-item { background: #141a22; border: 1px solid #161b22; border-radius: 10px; padding: 12px 14px; }
+.detail-label { font-size: 0.68rem; color: #484f58; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+.detail-value { font-size: 1rem; font-weight: 700; margin-top: 3px; }
+.detail-section-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #161b22; }
+
+.xai-block { background: #141a22; border: 1px solid #161b22; border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; border-left: 3px solid #d29922; }
+.xai-cause { font-weight: 700; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; }
+.xai-impact { font-size: 0.72rem; font-weight: 700; color: #f85149; background: rgba(248,81,73,0.1); padding: 2px 8px; border-radius: 10px; }
+.xai-detail { font-size: 0.78rem; color: #8b949e; margin-top: 4px; line-height: 1.5; }
+.rec-item { padding: 7px 0; font-size: 0.82rem; line-height: 1.5; color: #8b949e; border-bottom: 1px solid #161b22; }
+.rec-item:last-child { border-bottom: none; }
+
+/* ─── ANALYTICS CARDS ─────────────────────────────────────── */
+.analytics-card { background: #141a22; border: 1px solid #21262d; border-radius: 14px; padding: 20px; }
+.analytics-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 14px; }
+
+.bar-chart { display: flex; flex-direction: column; gap: 10px; }
+.bar-row { display: flex; align-items: center; gap: 10px; }
+.bar-label { width: 100px; font-size: 0.75rem; font-weight: 600; color: #8b949e; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { flex: 1; height: 20px; background: #0a0e14; border-radius: 6px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
+.bar-fill.efficient { background: linear-gradient(90deg,#22c55e,#3fb950); }
+.bar-fill.warning { background: linear-gradient(90deg,#eab308,#d29922); }
+.bar-fill.critical { background: linear-gradient(90deg,#ef4444,#f85149); }
+.bar-value { width: 70px; font-size: 0.75rem; font-weight: 700; }
+
+.ranking-table { width: 100%; border-collapse: collapse; }
+.ranking-table th { text-align: left; padding: 8px 12px; font-size: 0.68rem; font-weight: 700; color: #484f58; text-transform: uppercase; border-bottom: 1px solid #21262d; }
+.ranking-table td { padding: 10px 12px; font-size: 0.8rem; border-bottom: 1px solid #161b22; }
+.ranking-table tr:hover td { background: #1a2230; }
+.rank-number { width: 24px; height: 24px; border-radius: 50%; background: #1c2432; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.68rem; }
+.rank-number.top { background: rgba(248,81,73,0.1); color: #f85149; }
+
+/* ─── DELETED CARDS ───────────────────────────────────────── */
+.deleted-card {
+  background: #141a22; border: 1px solid #21262d;
+  border-radius: 14px; padding: 16px 20px;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all 200ms ease; opacity: 0.85;
+}
+.deleted-card:hover { opacity: 1; border-color: #484f58; }
+
+/* ─── THEME SWITCH ────────────────────────────────────────── */
+.theme-switch { position: relative; display: inline-block; width: 42px; height: 22px; }
+.theme-switch input { opacity: 0; width: 0; height: 0; }
+.theme-slider {
+  position: absolute; cursor: pointer; inset: 0;
+  background: #0a0e14; border: 1px solid #21262d;
+  border-radius: 22px; transition: .3s;
+}
+.theme-slider:before {
+  position: absolute; content: ""; height: 16px; width: 16px;
+  left: 2px; bottom: 2px; background: #3fb950;
+  border-radius: 50%; transition: .3s;
+}
+input:checked + .theme-slider:before { transform: translateX(20px); }
+
+/* ─── PAGE VISIBILITY (must override Tailwind) ────────────── */
+.page { display: none !important; }
+.page.active { display: block !important; animation: pageIn 0.35s ease; }
+@keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ─── CHATBOT PANEL ───────────────────────────────────────── */
+.chatbot-panel {
+  position: fixed; bottom: 90px; right: 24px;
+  width: 400px; height: 540px;
+  background: #0f1419; border: 1px solid #21262d;
+  border-radius: 18px; box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+  display: none; flex-direction: column; z-index: 500; overflow: hidden;
+  animation: chatSlideUp 350ms cubic-bezier(0.4,0,0.2,1);
+}
+.chatbot-panel.active { display: flex; }
+@keyframes chatSlideUp { from { opacity: 0; transform: translateY(20px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+.chat-message { display: flex; gap: 8px; max-width: 95%; }
+.chat-message.bot { align-self: flex-start; }
+.chat-message.user { align-self: flex-end; flex-direction: row-reverse; }
+
+.chat-avatar {
+  width: 28px; height: 28px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.chat-avatar.bot { background: rgba(63,185,80,0.12); color: #3fb950; }
+.chat-avatar.user { background: rgba(136,132,216,0.12); color: #8884d8; }
+
+.chat-bubble {
+  background: #141a22; border: 1px solid #161b22;
+  border-radius: 10px; padding: 10px 14px;
+  font-size: 0.8rem; line-height: 1.6; color: #8b949e;
+}
+.chat-message.user .chat-bubble {
+  background: rgba(63,185,80,0.1); border-color: rgba(63,185,80,0.2);
+  color: #e6edf3;
+}
+.chat-bubble p { margin-bottom: 6px; }
+.chat-bubble p:last-child { margin-bottom: 0; }
+
+.chat-suggest-btn {
+  padding: 4px 10px; font-size: 0.68rem;
+  background: #0f1419; border: 1px solid #21262d;
+  border-radius: 12px; color: #8b949e;
+  transition: all 150ms ease; cursor: pointer;
+}
+.chat-suggest-btn:hover { background: rgba(63,185,80,0.1); border-color: #3fb950; color: #3fb950; }
+
+/* previously chat-suggestions for compatibility with app.js */
+.chat-suggestions { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.chat-suggestions button { padding: 4px 10px; font-size: 0.68rem; background: #0f1419; border: 1px solid #21262d; border-radius: 12px; color: #8b949e; transition: all 150ms ease; cursor: pointer; }
+.chat-suggestions button:hover { background: rgba(63,185,80,0.1); border-color: #3fb950; color: #3fb950; }
+
+/* ─── TOASTS ──────────────────────────────────────────────── */
+.toast {
+  background: #1c2432; border: 1px solid #21262d;
+  border-radius: 10px; padding: 12px 18px;
+  font-size: 0.82rem; color: #e6edf3;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: toastSlide 0.3s ease;
+  display: flex; align-items: center; gap: 10px; min-width: 260px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.toast.success { border-left: 3px solid #3fb950; }
+.toast.error { border-left: 3px solid #f85149; }
+.toast.info { border-left: 3px solid #38bdf8; }
+@keyframes toastSlide { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+
+/* ─── SPINNER ─────────────────────────────────────────────── */
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+  border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── LIGHT MODE OVERRIDES ────────────────────────────────── */
+html.light body { background: #f0f2f5; color: #1a202c; }
+html.light .sidebar, html.light .chatbot-panel { background: #fff; border-color: #e2e8f0; }
+html.light .nav-item { color: #4a5568; }
+html.light .nav-item:hover { background: #f8fafc; color: #1a202c; }
+html.light .nav-item.active { background: rgba(63,185,80,0.08); color: #2ea043; }
+html.light .summary-card, html.light .machine-card, html.light .analytics-card,
+html.light .deleted-card, html.light .form-group input, html.light .form-group select,
+html.light .detail-item, html.light .xai-block, html.light .chat-bubble { background: #fff; border-color: #e2e8f0; color: #1a202c; }
+html.light .form-group input, html.light .form-group select { background: #f8fafc; }
+html.light .modal-panel { background: #fff; border-color: #e2e8f0; }
+html.light .toast { background: #fff; border-color: #e2e8f0; color: #1a202c; }
+html.light .action-btn, html.light .filter-btn, html.light .btn-outline { border-color: #e2e8f0; color: #4a5568; }
+html.light .bar-track { background: #f0f2f5; }
+html.light .chat-suggest-btn, html.light .chat-suggestions button { background: #f8fafc; border-color: #e2e8f0; color: #4a5568; }
+
+/* ─── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  main { margin-left: 0 !important; padding: 16px !important; }
+  .machine-card { grid-template-columns: 1fr !important; gap: 10px; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .chatbot-panel { width: calc(100vw - 32px); right: 16px; }
+}
