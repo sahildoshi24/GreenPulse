@@ -94,6 +94,9 @@ async function loadDashboard() {
       fetch(API_BASE)
     ]);
 
+    if (!dashRes.ok) throw new Error(await dashRes.text());
+    if (!machinesRes.ok) throw new Error(await machinesRes.text());
+
     const dashboard = await dashRes.json();
     allMachines = await machinesRes.json();
 
@@ -553,6 +556,7 @@ function closeModal() {
 async function loadAnalytics() {
   try {
     const res = await fetch(`${API_BASE}/analysis/data`);
+    if (!res.ok) throw new Error(await res.text());
     const data = await res.json();
     const container = document.getElementById('analytics-grid');
 
