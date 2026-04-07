@@ -13,11 +13,16 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/greenpulse')
+if (!process.env.MONGODB_URI) {
+  throw new Error('MONGODB_URI is not set in environment variables');
+}
+
+mongoose.connect(process.env.MONGODB_URI, {
+  serverSelectionTimeoutMS: 5000
+})
   .then(() => console.log('✅ MongoDB connected — GreenPulse DB ready'))
   .catch(err => {
-    console.error('❌ MongoDB connection error:', err.message);
-    console.log('⚠️  Make sure MongoDB is running on localhost:27017');
+    console.error('❌ MongoDB connection error:', err);
   });
 
 // API Routes
